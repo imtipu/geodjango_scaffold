@@ -51,6 +51,7 @@ INSTALLED_APPS = [
 LOCAL_APPS = [
     'users.apps.UsersConfig',
     'locations.apps.LocationsConfig',
+    'modules.apps.ModulesConfig',
 ]
 
 THIRD_PARTY_APPS = [
@@ -163,7 +164,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'mediafiles')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 # allauth / users
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
@@ -173,17 +173,19 @@ ACCOUNT_CONFIRM_EMAIL_ON_GET = True
 ACCOUNT_LOGIN_ON_EMAIL_CONFIRMATION = True
 ACCOUNT_UNIQUE_EMAIL = True
 # LOGIN_REDIRECT_URL = "users:redirect"
-
+ACCOUNT_ADAPTER = "users.adapters.AccountAdapter"
+SOCIALACCOUNT_ADAPTER = "users.adapters.SocialAccountAdapter"
+ACCOUNT_ALLOW_REGISTRATION = env.bool("ACCOUNT_ALLOW_REGISTRATION", True)
+SOCIALACCOUNT_ALLOW_REGISTRATION = env.bool("SOCIALACCOUNT_ALLOW_REGISTRATION", True)
 
 # Custom user model
 AUTH_USER_MODEL = "users.User"
-
 
 # rest framework settings
 REST_FRAMEWORK = {
     # Use Django's standard `django.contrib.auth` permissions,
     # or allow read-only access for unauthenticated users.
-    # 'DEFAULT_PAGINATION_CLASS': 'modules.api.v1.pagination.CustomPageNumberPagination',
+    'DEFAULT_PAGINATION_CLASS': 'modules.api.v1.pagination.CustomPageNumberPagination',
     'PAGE_SIZE': 20,
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
@@ -205,7 +207,6 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
 DEFAULT_FROM_EMAIL = env.str('DEFAULT_FROM_EMAIL', '')
-
 
 # AWS S3 config
 AWS_ACCESS_KEY_ID = env.str("AWS_ACCESS_KEY_ID", "")
@@ -244,7 +245,6 @@ if DEBUG or not (EMAIL_HOST_USER and EMAIL_HOST_PASSWORD):
         logging.warning("You should setup `SENDGRID_USERNAME` and `SENDGRID_PASSWORD` env vars to send emails.")
     # EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-
 if DEBUG:
     MIDDLEWARE += [
         'debug_toolbar.middleware.DebugToolbarMiddleware',
@@ -264,7 +264,6 @@ if DEBUG:
 
 # cors settings
 CORS_ALLOW_ALL_ORIGINS = True
-
 
 if os.name == 'nt':
     import platform
