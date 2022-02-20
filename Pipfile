@@ -1,0 +1,29 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django = "==3.2"
+djangorestframework = "*"
+django-bootstrap4 = "*"
+django-allauth = "*"
+django-rest-auth = "*"
+django-extensions = "*"
+drf-yasg = "*"
+pillow = "*"
+django-debug-toolbar = "*"
+django-cleanup = "*"
+django-cors-headers = "*"
+djangorestframework-gis = "*"
+geoip2 = "*"
+geopy = "*"
+pipwin = "*"
+waitress = "*"
+whitenoise = "*"
+django-environ = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.8"

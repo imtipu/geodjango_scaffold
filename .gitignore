@@ -1,0 +1,13 @@
+*.pyc
+.idea
+env/
+.terraform
+.venv
+.env
+staticfiles/
+postgres-data/
+mediafiles/
+geoip_data/
+celerybeat-schedule.bak
+celerybeat-schedule.dat
+celerybeat-schedule.dir
